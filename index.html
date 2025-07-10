@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sandra</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap');
+
+    body {
+      margin: 0;
+      background: linear-gradient(to bottom right, #2d2d2d, #0f2027);
+      color: white;
+      font-family: 'Quicksand', sans-serif;
+      overflow: hidden;
+      touch-action: manipulation;
+    }
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      background-image: radial-gradient(#ffffff33 1px, transparent 1px);
+      background-size: 20px 20px;
+      animation: moveParticles 60s linear infinite;
+      opacity: 0.1;
+    }
+    @keyframes moveParticles {
+      0% { background-position: 0 0; }
+      100% { background-position: 1000px 1000px; }
+    }
+    .container {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      text-align: center;
+      flex-direction: column;
+      z-index: 1;
+    }
+    .name {
+      color: #FFD700;
+      font-size: 4rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.8), 0 0 20px rgba(255, 140, 0, 0.6);
+      animation: flicker 3s infinite;
+      gap: 15px;
+    }
+    @keyframes flicker {
+      0%, 100% { text-shadow: 0 0 10px #FFD700; }
+      50% { text-shadow: 0 0 20px #FFA500, 0 0 30px #FF8C00; }
+    }
+    .sunflower {
+      position: relative;
+      width: 60px;
+      height: 60px;
+      animation: spin 10s linear infinite;
+    }
+    .petal {
+      position: absolute;
+      width: 16px;
+      height: 30px;
+      background: #FFD700;
+      border-radius: 50% 50% 0 0;
+      transform-origin: bottom center;
+    }
+    .center {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      background: #5A3A00;
+      border-radius: 50%;
+      top: 18px;
+      left: 18px;
+      z-index: 1;
+    }
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .word {
+      position: absolute;
+      font-size: 1.8rem;
+      font-weight: 700;
+      opacity: 0.95;
+      animation: floatWord 2.8s ease-out forwards, glow 1.2s ease-in-out;
+      pointer-events: none;
+      text-shadow: 1px 1px 3px #000;
+      white-space: nowrap;
+    }
+    @keyframes floatWord {
+      0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      50% {
+        transform: translateY(-60px) scale(1.25);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-140px) scale(1);
+      }
+    }
+    @keyframes glow {
+      0% { text-shadow: 0 0 5px #fff; }
+      50% { text-shadow: 0 0 15px #fff; }
+      100% { text-shadow: 0 0 5px #fff; }
+    }
+  </style>
+</head>
+<body>
+  <div class="particles"></div>
+  <div class="container" onclick="showWord(event)">
+    <div class="name">
+      SANDRA
+      <div class="sunflower">
+        <div class="center"></div>
+        <div class="petal" style="transform: rotate(0deg) translateY(-30px);"></div>
+        <div class="petal" style="transform: rotate(30deg) translateY(-30px);"></div>
+        <div class="petal" style="transform: rotate(60deg) translateY(-30px);"></div>
+        <div class="petal" style="transform: rotate(90deg) translateY(-30px);"></div>
+        <div class="petal" style="transform: rotate(120deg) translateY(-30px);"></div>
+        <div class="petal" style="transform: rotate(150deg) translateY(-30px);"></div>
+        <div class="petal" style="transform: rotate(180deg) translateY(-30px);"></div>
+        <div class="petal" style="transform: rotate(210deg) translateY(-30px);"></div>
+        <div class="petal" style="transform: rotate(240deg) translateY(-30px);"></div>
+        <div class="petal" style="transform: rotate(270deg) translateY(-30px);"></div>
+        <div class="petal" style="transform: rotate(300deg) translateY(-30px);"></div>
+        <div class="petal" style="transform: rotate(330deg) translateY(-30px);"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+
+  const audio = new Audio("cancion.mp3");
+  audio.loop = true;
+
+  document.body.addEventListener("click", () => {
+    if (audio.paused) {
+      audio.play().catch(() => {});
+    }
+  }, { once: true });
+    const palabras = [
+      "Me caes muy bien", "Me gusta pasar tiempo contigo", "Me haces sentir bien",
+      "Me encanta tu forma de ser", "Me agradas más de lo que imaginaba", "Me haces sonreír sin razón",
+      "Me inspiras confianza", "Me atraes", "Me intrigas", "Me importas más de lo que crees",
+      "Te tengo un cariño especial", "Eres alguien importante para mí", "Me haces falta cuando no estás",
+      "Me preocupas", "Me alegra tenerte en mi vida", "Eres una persona valiosa para mí",
+      "Me haces bien", "Tu presencia me calma", "Me fascinas", "Me enloqueces",
+      "No dejo de pensar en ti", "Me encantas por completo", "Hay algo en ti que no puedo explicar",
+      "Me tienes completamente atrapado/a", "Me haces sentir mariposas", "Me derrites con una mirada",
+      "Me gustas mucho", "Eres mi caos favorito", "Eres como una canción que no puedo dejar de escuchar",
+      "Eres el mensaje que siempre espero", "Eres mi pensamiento recurrente",
+      "Me gustas como el café", "Tu forma de ser es mi debilidad", "Eres mi lugar favorito sin ser un lugar"
+    ];
+    const colores = ["#FFD700", "#FF69B4", "#ADFF2F", "#00FFFF", "#FFA07A", "#FFB6C1", "#87CEFA", "#40E0D0", "#FF6347", "#DA70D6"];
+    function showWord(e) {
+      const word = document.createElement('div');
+      word.className = 'word';
+      word.style.left = `${e.clientX}px`;
+      word.style.top = `${e.clientY}px`;
+      word.style.color = colores[Math.floor(Math.random() * colores.length)];
+      word.innerText = palabras[Math.floor(Math.random() * palabras.length)];
+      document.body.appendChild(word);
+      setTimeout(() => word.remove(), 2800);
+    }
+  </script>
+</body>
+</html>
